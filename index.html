@@ -4,40 +4,71 @@
  -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <!-- <script src="script.js"></script> -->
-</head>
-<body>
-  <h2>Popup Form</h2>
-  <p>Click on the button at the bottom of this page to open the login form.</p>
-  <p>Note that the button and the form is fixed - they will always be positioned to the bottom of the browser window.</p>
-<button class="open-button" onclick="openForm()">Open Form</button>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Popup Form</h2>
+      <p>
+        Click on the button at the bottom of this page to open the login form.
+      </p>
+      <p>
+        Note that the button and the form is fixed - they will always be
+        positioned to the bottom of the browser window.
+      </p>
+      <br /><br /><br />
+      <button class="open-button" id="open-btn" onclick="myFunction()">
+        Open Form
+      </button>
 
-<div class="form-popup" id="myForm">
+      <div class="form-popup hidden" id="myForm">
+        <form action="/action_page.php" class="form-container">
+          <h1>login</h1>
 
-  <form action="/action_page.php" class="form-container">
-    <h1>login</h1>
-    <label for="email"><b>Email</b></label>
-    <input type="email" placeholder="phone nnumber, username or email" name="email" required>
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="enter password" name="psw" required>
+          <label for="email"><b>Email</b></label>
+          <input
+            type="email"
+            placeholder="phone nnumber, username or email"
+            name="email"
+            required
+          />
+          <label for="psw"><b>Password</b></label>
+          <input
+            type="password"
+            placeholder="enter password"
+            name="psw"
+            required
+          />
 
-    <button type="submit" class="btn">Login</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-  </form>
-</div>
-<script>
-  function openForm(){
-    document.getElementById("myForm").style.display = "block";
-  }
+          <button type="submit" class="btn">Login</button>
 
-  function closeForm(){
-    document.getElementById("myForm").style.display = "none";
-  }
-</script>
-</body>
+        </form>
+      </div>
+    </div>
+    <script>
+      function myFunction() {
+        var classList = document.getElementById("myForm").classList;
+        var btn = document.getElementById("open-btn");
+        console.log(classList.contains("hidden"));
+          if (classList.contains("hidden")) {
+          console.log("in if");
+          classList.add("visible");
+          classList.remove("hidden");
+          btn.innerHTML = "close form";
+          
+        } else {
+          classList.add("hidden");
+          classList.remove("visible");
+          btn.innerHTML = "open form";
+          console.log("in else");
+         
+        }
+        }
+    </script>
+  </body>
 </html>
