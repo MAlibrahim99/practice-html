@@ -5,6 +5,11 @@ body{
 *{
   box-sizing: border-box;
 }
+
+.container{
+  width: 50%;
+  margin: auto;
+}
 /* Button used to open the conatact form - fixed at hte bottom of the page */
 .open-button{
   background-color: #555;
