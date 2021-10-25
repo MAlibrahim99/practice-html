@@ -8,7 +8,7 @@ body{
 
 .container{
   width: 50%;
-  margin: auto;
+  margin: 30px 30px;
 }
 /* Button used to open the conatact form - fixed at hte bottom of the page */
 .open-button{
