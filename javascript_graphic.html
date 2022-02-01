@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+</head>
+
+<script>
+
+    function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    function getRandColor(max) {
+        let rgbColor =
+            "rgb(" +
+            Math.floor(Math.random() * max) +
+            ", " +
+            Math.floor(Math.random() * max) +
+            ", " +
+            Math.floor(Math.random() * max) +
+            ")";
+        console.log(rgbColor);
+        return rgbColor;
+    }
+
+    async function changeBackgroundColor() {
+        const body = document.body;
+
+        while (true) {
+            await sleep(5000);
+            body.style.backgroundColor = getRandColor(256);
+            // console.log("i");
+        }
+    }
+
+    async function changeBackgroundColorV1() {
+        /*gradient change of background color*/
+        let color;
+        for (let r = 0; r <= 255; r++) {
+            for (let g = 0; g <= 255; g++) {
+                for (let b = 0; b <= 255; b++) {
+                    await sleep(100);
+                    color = "rgb(" + r + ", " + g + ", " + b + ")";
+                    document.body.style.backgroundColor = color;
+                }
+            }
+        }
+    }
+
+    function generateRand3DPoint(scale = 100, translate = 0) {
+        return [
+            Math.floor(Math.random() * scale + translate),
+            Math.floor(Math.random() * scale + translate),
+            Math.floor(Math.random() * scale + translate)];
+    }
+
+    async function gradientColor() {
+        let r, g, b, RGBPoint, index, maxValue;
+        const timeInterval = 20; // how fast can color be changed
+        const range = 100; // steps between two colors
+        r = 128;
+        g = 128;
+        b = 128;
+
+        while (true) {
+            RGBPoint = generateRand3DPoint(255, 0);
+            index = 0;
+            maxValue = Math.max(RGBPoint[0], RGBPoint[1], RGBPoint[2]);
+            // console.log(RGBPoint);
+
+            let rNorm = Math.ceil(RGBPoint[0] / maxValue);
+            let gNorm = Math.ceil(RGBPoint[1] / maxValue);
+            let bNorm = Math.ceil(RGBPoint[2] / maxValue);
+
+            if (r > RGBPoint[0]) {
+                rNorm = (-1 * RGBPoint[0]) / range;
+            }
+            if (g > RGBPoint[1]) {
+                gNorm = (-1 * RGBPoint[1]) / range;
+            }
+            if (b > RGBPoint[2]) {
+                bNorm = (-1 * RGBPoint[2]) / range;
+            }
+            while (index < range) {
+                await sleep(timeInterval);
+                r = Math.min(r + rNorm, 255);
+                g = Math.min(g + gNorm, 255);
+                b = Math.min(b + bNorm, 255);
+
+                document.body.style.backgroundColor = "rgb(" + r + ", " + g + ", " + b + ")";
+                index++;
+            }
+        }
+    }
+
+</script>
+
+<body onload="gradientColor()"></body>
+</html>
